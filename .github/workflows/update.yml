@@ -41,5 +41,5 @@ jobs:
               --repo-type dataset \
               feilongfl/stock_tushare_daily \
               $file \
-              --token "${{ secrets.HF_TOKEN }}" \
+              --token "${{ secrets.HF_TOKEN }}"
           done
