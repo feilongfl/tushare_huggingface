@@ -4,6 +4,8 @@ on:
   schedule:
     - cron: '0 16 * * 1-5'  # 每周一到周五 UTC+0（北京时间 8 点）
   workflow_dispatch:
+  push:
+    - main
 
 jobs:
   fetch:
