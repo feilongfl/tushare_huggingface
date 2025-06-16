@@ -38,9 +38,7 @@ jobs:
           for file in stock_data/daily/*.parquet; do
             uv run huggingface-cli upload \
               --repo-type dataset \
-              feilongfl/stock_tushare \
-              "$file" \
-              "data/$(basename $file)" \
+              feilongfl/stock_tushare_daily \
+              "stock_data/daily" \
               --token "${{ secrets.HF_TOKEN }}" \
-              --yes
           done
