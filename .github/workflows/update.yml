@@ -31,18 +31,16 @@ jobs:
         run: |
           uv venv .venv
           source .venv/bin/activate
-          python main.py --token=${{ secrets.TUSHARE_TOKEN }} --start=$(date +'%Y%m%d') --end=$(date +'%Y%m%d')
-
-      - name: Install Hugging Face CLI
-        run: |
-          uv pip install huggingface_hub
+          uv run main.py --token=${{ secrets.TUSHARE_TOKEN }} --start=$(date +'%Y%m%d') --end=$(date +'%Y%m%d')
 
       - name: Upload parquet to Hugging Face
         run: |
           for file in stock_data/daily/*.parquet; do
-            huggingface-cli upload \
+            uv run huggingface-cli upload \
               --repo-type dataset \
               feilongfl/stock_tushare \
               "$file" \
               "data/$(basename $file)" \
-              --token "$
+              --token "${{ secrets.HF_TOKEN }}" \
+              --yes
+          done
