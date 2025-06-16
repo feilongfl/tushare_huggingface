@@ -5,9 +5,13 @@ description = "Add your description here"
 readme = "README.md"
 requires-python = ">=3.10"
 dependencies = [
+    "akshare>=1.17.4",
     "datasets>=3.6.0",
+    "fire>=0.7.0",
     "huggingface-hub>=0.33.0",
+    "loguru>=0.7.3",
     "pandas>=2.3.0",
     "pyarrow>=20.0.0",
+    "tqdm>=4.67.1",
     "tushare>=1.4.21",
 ]
