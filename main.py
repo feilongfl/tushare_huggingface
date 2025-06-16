@@ -28,7 +28,7 @@ def fetch_all_daily(token: str, data_dir: str = "stock_data/daily",
     data_path = Path(data_dir)
     data_path.mkdir(parents=True, exist_ok=True)
 
-    dates = get_trade_dates(start, end)
+    dates = get_trade_dates(str(start), str(end))
     logger.info(f"Got {len(dates)} trading dates from {start} to {end}")
 
     def get_daily_by_date(date: str) -> pd.DataFrame:
