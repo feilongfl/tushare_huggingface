@@ -2,7 +2,7 @@ name: Daily Stock Data Update
 
 on:
   schedule:
-    - cron: '0 0 * * 1-5'  # 每周一到周五 UTC+1点（北京时间 9 点）
+    - cron: '0 16 * * 1-5'  # 每周一到周五 UTC+0（北京时间 8 点）
   workflow_dispatch:
 
 jobs:
@@ -14,11 +14,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Install uv
-        uses: supplypike/setup-bin@v3
-        with:
-          uri: https://github.com/astral-sh/uv/releases/latest/download/uv-x86_64-unknown-linux-gnu.tar.gz
-          name: uv
-          bin-dir: /usr/local/bin
+        uses: astral-sh/setup-uv@v1
 
       - name: Set up Python
         uses: actions/setup-python@v5
@@ -28,7 +24,7 @@ jobs:
       - name: Sync dependencies with uv
         run: uv sync
 
-      - name: Run stock data fetch
+      - name: Create and activate venv, run stock fetch
         run: |
           uv venv .venv
           source .venv/bin/activate
@@ -46,6 +42,4 @@ jobs:
               feilongfl/stock_tushare \
               "$file" \
               "data/$(basename $file)" \
-              --token "${{ secrets.HF_TOKEN }}" \
-              --yes
-          done
+              --token "$
