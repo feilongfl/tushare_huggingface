@@ -36,9 +36,10 @@ jobs:
       - name: Upload parquet to Hugging Face
         run: |
           for file in stock_data/daily/*.parquet; do
+            echo upload $file
             uv run huggingface-cli upload \
               --repo-type dataset \
               feilongfl/stock_tushare_daily \
-              "stock_data/daily" \
+              $file \
               --token "${{ secrets.HF_TOKEN }}" \
           done
